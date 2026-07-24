@@ -13,7 +13,7 @@ import type { Lead, LeadStatus } from "@/lib/types";
 import { isLikelyMobileUAE, toWhatsAppNumber } from "@/lib/phone";
 
 function buildWhatsAppMessage(lead: Lead): string {
-  return `Hey! I came across ${lead.name} and noticed you don't have a website yet. I build clean, mobile-friendly websites for businesses like yours - happy to share a quick idea of what it could look like. Let me know if you'd be interested!`;
+  return `Hey! I came across ${lead.name} and noticed you don't have a website yet. We at Zentual build clean, mobile-friendly websites for businesses like yours - happy to share a quick idea of what it could look like. Let me know if you'd be interested!`;
 }
 
 const STATUS_ORDER: LeadStatus[] = ["new", "contacted", "replied"];
