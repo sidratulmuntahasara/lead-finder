@@ -10,6 +10,11 @@
 
 import { useEffect, useMemo, useState } from "react";
 import type { Lead, LeadStatus } from "@/lib/types";
+import { isLikelyMobileUAE, toWhatsAppNumber } from "@/lib/phone";
+
+function buildWhatsAppMessage(lead: Lead): string {
+  return `Hey! I came across ${lead.name} and noticed you don't have a website yet. I build clean, mobile-friendly websites for businesses like yours - happy to share a quick idea of what it could look like. Let me know if you'd be interested!`;
+}
 
 const STATUS_ORDER: LeadStatus[] = ["new", "contacted", "replied"];
 
@@ -276,6 +281,23 @@ export default function Home() {
                 >
                   {STATUS_LABEL[lead.status]} — click to advance
                 </button>
+
+                {lead.phone && isLikelyMobileUAE(lead.phone) ? (
+                  <a
+                    href={`https://wa.me/${toWhatsAppNumber(lead.phone)}?text=${encodeURIComponent(
+                      buildWhatsAppMessage(lead)
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-2 flex w-full items-center justify-center gap-2 rounded-lg bg-[#25D366] px-3 py-2 text-sm font-medium text-white transition hover:opacity-90"
+                  >
+                    Message on WhatsApp
+                  </a>
+                ) : lead.phone ? (
+                  <p className="mt-2 text-center text-xs text-neutral-400">
+                    Landline number — try Instagram or LinkedIn instead
+                  </p>
+                ) : null}
               </div>
             ))}
           </div>
